@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://*.firebaseio.com https://*.googleapis.com; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' https://i.ytimg.com https://img.youtube.com; frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com; script-src 'self';">
+  <meta name="description" content="ES-Company développe des outils modernes de gestion, SaaS et solutions web sur mesure pour accompagner la croissance des entreprises.">
+  <title>ES-Company — Solutions digitales pour entreprises</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Écran de sélection de langue (premier accès) -->
+  <div id="lang-welcome-overlay" class="overlay overlay--hidden" role="dialog" aria-modal="true" aria-labelledby="lang-welcome-title">
+    <div class="lang-welcome">
+      <h2 id="lang-welcome-title" class="lang-welcome__title" data-i18n="langWelcomeTitle">Choisissez votre langue</h2>
+      <div class="lang-welcome__buttons">
+        <button type="button" class="lang-welcome__btn" data-lang="fr" id="lang-btn-fr">Français</button>
+        <button type="button" class="lang-welcome__btn" data-lang="en" id="lang-btn-en">English</button>
+        <button type="button" class="lang-welcome__btn" data-lang="sw" id="lang-btn-sw">Kiswahili</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal vidéo de présentation (premier accès) -->
+  <div id="intro-modal-overlay" class="overlay overlay--hidden" role="dialog" aria-modal="true" aria-labelledby="intro-modal-title">
+    <div class="intro-modal">
+      <h2 id="intro-modal-title" class="intro-modal__title" data-i18n="introModalTitle">Bienvenue chez ES-Company</h2>
+      <p class="intro-modal__text" data-i18n="introModalText">Découvrez notre vidéo de présentation pour en savoir plus sur qui nous sommes et ce que nous faisons.</p>
+      <div class="intro-modal__video" id="intro-modal-video-wrap">
+        <button type="button" class="intro-modal__close" id="intro-modal-close" data-i18n-aria="introModalClose" aria-label="Fermer la vidéo">&times;</button>
+        <div id="intro-modal-youtube" class="youtube-container"></div>
+      </div>
+      <div class="intro-modal__actions">
+        <button type="button" class="btn btn--secondary" id="intro-modal-skip" data-i18n="introModalSkip">Passer</button>
+        <button type="button" class="btn btn--primary" id="intro-modal-watch" data-i18n="introModalWatch">Regarder la vidéo</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header id="header" class="header">
+    <div class="container header__inner">
+      <a href="#hero" class="header__logo" id="header-logo">ES-<span>Company</span></a>
+      <nav class="nav" id="nav" aria-label="Navigation principale">
+        <ul class="nav__list" id="nav-list">
+          <li><a href="#hero" class="nav__link" data-i18n="navHome">Accueil</a></li>
+          <li><a href="#solutions" class="nav__link" data-i18n="navSolutions">Solutions</a></li>
+          <li><a href="#projects" class="nav__link" data-i18n="navProjects">Projets</a></li>
+          <li><a href="#gallery" class="nav__link" data-i18n="navVideos">Vidéos</a></li>
+          <li><a href="#contact" class="nav__link" data-i18n="navContact">Contact</a></li>
+        </ul>
+        <div class="lang-selector" id="lang-selector" role="group" aria-label="Sélection de langue">
+          <button type="button" class="lang-selector__btn lang-selector__btn--active" data-lang="fr" id="lang-sel-fr">FR</button>
+          <button type="button" class="lang-selector__btn" data-lang="en" id="lang-sel-en">EN</button>
+          <button type="button" class="lang-selector__btn" data-lang="sw" id="lang-sel-sw">SW</button>
+        </div>
+        <button type="button" class="nav-toggle" id="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="nav-list">
+          <span class="nav-toggle__bar"></span>
+          <span class="nav-toggle__bar"></span>
+          <span class="nav-toggle__bar"></span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero">
+      <div class="hero__bg" aria-hidden="true"></div>
+      <div class="hero__grid" aria-hidden="true"></div>
+      <div class="container">
+        <div class="hero__content fade-in">
+          <div class="hero__badge">
+            <span class="hero__badge-dot" aria-hidden="true"></span>
+            <span data-i18n="heroBadge">Solutions digitales innovantes</span>
+          </div>
+          <h1 class="hero__title" data-i18n="heroTitle">Des solutions digitales pour faire évoluer votre entreprise</h1>
+          <p class="hero__subtitle" data-i18n="heroSubtitle">ES-Company développe des outils modernes qui simplifient la gestion, améliorent les performances et accompagnent la croissance des entreprises.</p>
+          <div class="hero__actions">
+            <a href="#projects" class="btn btn--accent" id="hero-cta-projects" data-i18n="heroCtaProjects">Découvrir nos projets</a>
+            <a href="#contact" class="btn btn--ghost" id="hero-cta-contact" data-i18n="heroCtaContact">Nous contacter</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Vidéo introduction (courte) -->
+    <section id="video-section" class="section section--alt">
+      <div class="container">
+        <div class="section__header fade-in">
+          <span class="video-badge video-badge--short" data-i18n="videoIntroBadge">Courte</span>
+          <h2 class="section__title" data-i18n="videoSectionTitle">Introduction</h2>
+          <p class="section__subtitle" data-i18n="videoSectionSubtitle">Une courte vidéo pour découvrir qui nous sommes et ce que nous faisons.</p>
+        </div>
+        <div class="video-section__wrapper fade-in">
+          <div id="intro-youtube" class="youtube-container"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Nos solutions -->
+    <section id="solutions" class="section">
+      <div class="container">
+        <div class="section__header fade-in">
+          <h2 class="section__title" data-i18n="solutionsTitle">Nos solutions</h2>
+          <p class="section__subtitle" data-i18n="solutionsSubtitle">Des outils conçus pour répondre aux besoins réels des entreprises modernes.</p>
+        </div>
+        <div class="solutions-grid">
+          <article class="solution-card fade-in" id="solution-1">
+            <div class="solution-card__icon" aria-hidden="true">📊</div>
+            <h3 class="solution-card__title" data-i18n="solution1Title">Gestion d'entreprise</h3>
+            <div class="solution-card__tags" id="solution1-tags"></div>
+          </article>
+          <article class="solution-card fade-in" id="solution-2">
+            <div class="solution-card__icon" aria-hidden="true">☁️</div>
+            <h3 class="solution-card__title" data-i18n="solution2Title">SaaS</h3>
+            <div class="solution-card__tags" id="solution2-tags"></div>
+          </article>
+          <article class="solution-card fade-in" id="solution-3">
+            <div class="solution-card__icon" aria-hidden="true">🌐</div>
+            <h3 class="solution-card__title" data-i18n="solution3Title">Développement web</h3>
+            <div class="solution-card__tags" id="solution3-tags"></div>
+          </article>
+          <article class="solution-card fade-in" id="solution-4">
+            <div class="solution-card__icon" aria-hidden="true">⚡</div>
+            <h3 class="solution-card__title" data-i18n="solution4Title">Automatisation</h3>
+            <div class="solution-card__tags" id="solution4-tags"></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Nos projets -->
+    <section id="projects" class="section section--alt">
+      <div class="container">
+        <div class="section__header fade-in">
+          <h2 class="section__title" data-i18n="projectsTitle">Nos projets</h2>
+          <p class="section__subtitle" data-i18n="projectsSubtitle">Des solutions concrètes déjà déployées pour des entreprises ambitieuses.</p>
+        </div>
+        <div class="projects-list">
+
+          <!-- StockFlow -->
+          <article class="project-card fade-in" id="project-stockflow">
+            <div class="project-card__content">
+              <span class="project-card__badge" data-i18n="stockflowBadge">Gestion commerciale</span>
+              <h3 class="project-card__title" data-i18n="stockflowTitle">StockFlow</h3>
+              <p class="project-card__desc" data-i18n="stockflowDesc">StockFlow aide les entreprises à suivre leurs ventes, leurs stocks, leurs dépenses, leurs dettes et leur rentabilité à partir d'une interface simple et moderne.</p>
+              <div class="project-card__features" id="stockflow-features"></div>
+              <a href="#tutoriel-section" class="btn btn--primary" id="stockflow-cta" data-i18n="stockflowCta">Voir le tutoriel</a>
+            </div>
+            <div class="project-card__media project-card__media--placeholder" id="stockflow-media">
+              <div class="project-card__media-label" data-i18n="videoTutorielTitle">Tutoriel</div>
+            </div>
+          </article>
+
+          <!-- CBC Station -->
+          <article class="project-card project-card--reverse fade-in" id="project-cbc">
+            <div class="project-card__content">
+              <span class="project-card__badge" data-i18n="cbcBadge">Plateforme B2B</span>
+              <h3 class="project-card__title" data-i18n="cbcTitle">CBC Station</h3>
+              <p class="project-card__desc" data-i18n="cbcDesc">CBC Station est une plateforme de mise en relation entre entreprises et prestataires qualifiés en RDC. Faciliter la recherche de professionnels et accélérer les collaborations commerciales.</p>
+              <a href="https://cbcstation.com" class="btn btn--accent" id="cbc-cta" target="_blank" rel="noopener noreferrer" data-i18n="cbcCta">Visiter CBC Station</a>
+            </div>
+            <div class="project-card__media project-card__media--placeholder" id="cbc-media">
+              <div class="project-card__media-label">cbcstation.com</div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Vidéo tutoriel (longue) -->
+    <section id="tutoriel-section" class="section">
+      <div class="container">
+        <div class="section__header fade-in">
+          <span class="video-badge video-badge--long" data-i18n="videoTutorielBadge">Complète</span>
+          <h2 class="section__title" data-i18n="videoTutorielTitle">Tutoriel</h2>
+          <p class="section__subtitle" data-i18n="videoTutorielSubtitle">Une vidéo détaillée pour apprendre à utiliser nos outils pas à pas.</p>
+        </div>
+        <div class="video-section__wrapper video-section__wrapper--large fade-in">
+          <div id="tutoriel-youtube" class="youtube-container"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Galerie vidéo -->
+    <section id="gallery" class="section section--alt">
+      <div class="container">
+        <div class="section__header fade-in">
+          <h2 class="section__title" data-i18n="galleryTitle">Galerie vidéo</h2>
+          <p class="section__subtitle" data-i18n="gallerySubtitle">Retrouvez notre introduction courte et le tutoriel complet.</p>
+        </div>
+        <div class="gallery-tabs fade-in" role="tablist" id="gallery-tabs">
+          <button type="button" class="gallery-tab gallery-tab--active" data-category="intro" id="gallery-tab-intro" role="tab" aria-selected="true" data-i18n="galleryTabPresentations">Introduction</button>
+          <button type="button" class="gallery-tab" data-category="tutoriel" id="gallery-tab-tutoriel" role="tab" aria-selected="false" data-i18n="galleryTabTutorials">Tutoriel</button>
+        </div>
+        <div class="gallery-grid gallery-grid--duo" id="gallery-grid">
+
+          <article class="gallery-card fade-in" data-category="intro" data-youtube="intro" id="gallery-card-intro">
+            <div class="gallery-card__media">
+              <div class="gallery-card__thumb">
+                <div class="gallery-card__play" aria-hidden="true"><div class="gallery-card__play-icon"></div></div>
+              </div>
+              <div class="gallery-card__embed"></div>
+            </div>
+            <div class="gallery-card__body">
+              <span class="video-badge video-badge--short" data-i18n="videoIntroBadge">Courte</span>
+              <h3 class="gallery-card__title" data-i18n="galleryIntroTitle">Introduction ES-Company</h3>
+            </div>
+          </article>
+
+          <article class="gallery-card gallery-card--hidden fade-in" data-category="tutoriel" data-youtube="tutoriel" id="gallery-card-tutoriel">
+            <div class="gallery-card__media">
+              <div class="gallery-card__thumb">
+                <div class="gallery-card__play" aria-hidden="true"><div class="gallery-card__play-icon"></div></div>
+              </div>
+              <div class="gallery-card__embed"></div>
+            </div>
+            <div class="gallery-card__body">
+              <span class="video-badge video-badge--long" data-i18n="videoTutorielBadge">Complète</span>
+              <h3 class="gallery-card__title" data-i18n="galleryTutorielTitle">Tutoriel complet</h3>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Pourquoi ES-Company -->
+    <section id="why" class="section section--alt">
+      <div class="container">
+        <div class="section__header fade-in">
+          <h2 class="section__title" data-i18n="whyTitle">Pourquoi ES-Company</h2>
+          <p class="section__subtitle" data-i18n="whySubtitle">Un partenaire technologique de confiance pour votre croissance.</p>
+        </div>
+        <div class="why-grid">
+          <article class="why-card fade-in" id="why-1">
+            <div class="why-card__icon" aria-hidden="true">🎯</div>
+            <h3 class="why-card__title" data-i18n="why1Title">Solutions concrètes</h3>
+            <p class="why-card__text" data-i18n="why1Text">Des outils pensés pour résoudre de vrais problèmes métier au quotidien.</p>
+          </article>
+          <article class="why-card fade-in" id="why-2">
+            <div class="why-card__icon" aria-hidden="true">🔧</div>
+            <h3 class="why-card__title" data-i18n="why2Title">Développement sur mesure</h3>
+            <p class="why-card__text" data-i18n="why2Text">Chaque solution est adaptée aux besoins spécifiques de votre activité.</p>
+          </article>
+          <article class="why-card fade-in" id="why-3">
+            <div class="why-card__icon" aria-hidden="true">🤝</div>
+            <h3 class="why-card__title" data-i18n="why3Title">Accompagnement</h3>
+            <p class="why-card__text" data-i18n="why3Text">Nous vous guidons de la conception au déploiement et au-delà.</p>
+          </article>
+          <article class="why-card fade-in" id="why-4">
+            <div class="why-card__icon" aria-hidden="true">💡</div>
+            <h3 class="why-card__title" data-i18n="why4Title">Innovation</h3>
+            <p class="why-card__text" data-i18n="why4Text">Technologies modernes pour des performances et une fiabilité optimales.</p>
+          </article>
+          <article class="why-card fade-in" id="why-5">
+            <div class="why-card__icon" aria-hidden="true">📍</div>
+            <h3 class="why-card__title" data-i18n="why5Title">Proximité</h3>
+            <p class="why-card__text" data-i18n="why5Text">Une équipe locale qui comprend les réalités des entreprises en RDC.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="section">
+      <div class="container">
+        <div class="section__header fade-in">
+          <h2 class="section__title" data-i18n="contactTitle">Contactez-nous</h2>
+          <p class="section__subtitle" data-i18n="contactSubtitle">Parlons de votre projet et trouvons ensemble la meilleure solution.</p>
+        </div>
+        <div class="contact-grid">
+          <div class="contact-info fade-in" id="contact-info">
+            <h3 class="contact-info__title" data-i18n="contactInfoTitle">Restons en contact</h3>
+            <p class="contact-info__subtitle" data-i18n="contactInfoSubtitle">Notre équipe est prête à répondre à vos questions.</p>
+            <ul class="contact-info__list">
+              <li class="contact-info__item" id="contact-company">
+                <div class="contact-info__icon" aria-hidden="true">🏢</div>
+                <div>
+                  <p class="contact-info__label" data-i18n="contactCompany">Entreprise</p>
+                  <p class="contact-info__value" data-i18n="contactCompanyValue">ES-Company</p>
+                </div>
+              </li>
+              <li class="contact-info__item" id="contact-email">
+                <div class="contact-info__icon" aria-hidden="true">✉️</div>
+                <div>
+                  <p class="contact-info__label" data-i18n="contactEmail">Email</p>
+                  <p class="contact-info__value"><a href="mailto:contact@es-company.com" id="contact-email-link">contact@es-company.com</a></p>
+                </div>
+              </li>
+              <li class="contact-info__item" id="contact-phone">
+                <div class="contact-info__icon" aria-hidden="true">📞</div>
+                <div>
+                  <p class="contact-info__label" data-i18n="contactPhone">Téléphone</p>
+                  <p class="contact-info__value" data-i18n="contactPhoneValue">À compléter</p>
+                </div>
+              </li>
+              <li class="contact-info__item" id="contact-whatsapp">
+                <div class="contact-info__icon" aria-hidden="true">💬</div>
+                <div>
+                  <p class="contact-info__label" data-i18n="contactWhatsapp">WhatsApp</p>
+                  <p class="contact-info__value" data-i18n="contactWhatsappValue">À compléter</p>
+                </div>
+              </li>
+              <li class="contact-info__item" id="contact-address">
+                <div class="contact-info__icon" aria-hidden="true">📍</div>
+                <div>
+                  <p class="contact-info__label" data-i18n="contactAddress">Adresse</p>
+                  <p class="contact-info__value" data-i18n="contactAddressValue">Butembo, RDC</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <form class="contact-form fade-in" id="contact-form" novalidate>
+            <div class="form-group">
+              <label for="form-name" data-i18n="formName">Nom</label>
+              <input type="text" id="form-name" name="name" required autocomplete="name">
+            </div>
+            <div class="form-group">
+              <label for="form-company" data-i18n="formCompany">Entreprise</label>
+              <input type="text" id="form-company" name="company" autocomplete="organization">
+            </div>
+            <div class="form-group">
+              <label for="form-email" data-i18n="formEmail">Email</label>
+              <input type="email" id="form-email" name="email" required autocomplete="email">
+            </div>
+            <div class="form-group">
+              <label for="form-message" data-i18n="formMessage">Message</label>
+              <textarea id="form-message" name="message" required></textarea>
+            </div>
+            <button type="submit" class="btn btn--primary" id="form-submit" data-i18n="formSubmit">Envoyer le message</button>
+            <p class="form-message" id="form-message-status" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer id="footer" class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div id="footer-brand-block">
+          <p class="footer__brand">ES-<span>Company</span></p>
+          <p class="footer__desc" data-i18n="footerDesc">ES-Company conçoit des solutions digitales modernes pour accompagner la croissance des entreprises en RDC et au-delà.</p>
+        </div>
+        <div id="footer-nav-block">
+          <p class="footer__heading" data-i18n="footerNav">Navigation</p>
+          <ul class="footer__links">
+            <li><a href="#hero" class="footer__link" data-i18n="navHome">Accueil</a></li>
+            <li><a href="#solutions" class="footer__link" data-i18n="navSolutions">Solutions</a></li>
+            <li><a href="#projects" class="footer__link" data-i18n="navProjects">Projets</a></li>
+            <li><a href="#gallery" class="footer__link" data-i18n="navVideos">Vidéos</a></li>
+            <li><a href="#contact" class="footer__link" data-i18n="navContact">Contact</a></li>
+          </ul>
+        </div>
+        <div id="footer-contact-block">
+          <p class="footer__heading" data-i18n="footerContact">Contact</p>
+          <ul class="footer__links">
+            <li><a href="mailto:escompany98@gmail.com" class="footer__link" id="footer-email-link">escompany98@gmail.com</a></li>
+            <li><span class="footer__link" data-i18n="contactAddressValue">Butembo, RDC</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p data-i18n="footerCopyright">© 2026 ES-Company. Tous droits réservés.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
