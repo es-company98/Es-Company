@@ -1,0 +1,31 @@
+Plan de travail ES-Company - Version Firebase
+
+Objectif
+- Charger dynamiquement les liens, vidéos et images depuis Firestore.
+- Distinguer clairement: pub, tutoriel complet, séries tutoriels, vlog.
+
+Etapes
+1. Configuration
+- Définir window.ES_FIREBASE_CONFIG dans un script local privé.
+- Vérifier connectivité Firestore.
+
+2. Données
+- Créer les collections décrites dans firebase_collections.txt.
+- Insérer 1 document actif minimum dans:
+  videos_pub, videos_tutoriels, videos_vlogs.
+
+3. Pages
+- index.html: afficher la vidéo pub au premier chargement.
+- tutorials.html: afficher tutoriel complet + bloc séries.
+- media.html: afficher vlog + galerie images.
+
+4. QA
+- Tester changement de langue FR/EN/SW sur chaque page.
+- Tester fallback quand Firestore est vide.
+- Tester sur mobile/desktop.
+
+5. Go-live
+- Publier sur GitHub Pages.
+- Injecter la config Firebase en production.
+- Vérifier CSP et logs console.
+

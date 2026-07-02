@@ -1,0 +1,445 @@
+---
+alwaysApply: true
+---
+
+PRD — Site Officiel ES-Company
+
+Objectif
+
+Créer une landing page professionnelle multilingue pour présenter ES-Company, ses solutions digitales, ses projets et son expertise.
+
+Le site doit inspirer :
+
+confiance
+
+professionnalisme
+
+innovation
+
+modernité
+
+crédibilité
+
+
+L'objectif principal est de :
+
+présenter l'entreprise
+
+présenter les projets développés
+
+démontrer nos compétences techniques
+
+générer des contacts commerciaux
+
+servir de vitrine officielle d'ES-Company
+
+
+
+---
+
+Présentation de l'entreprise
+
+ES-Company est une entreprise spécialisée dans la création de solutions digitales pour les entreprises.
+
+Nous développons :
+
+logiciels de gestion
+
+plateformes SaaS
+
+outils business
+
+systèmes d'automatisation
+
+solutions web sur mesure
+
+
+Notre mission :
+
+Aider les entreprises à mieux s'organiser, mieux gérer leurs activités et accélérer leur croissance grâce aux technologies modernes.
+
+
+---
+
+Langues
+
+Support complet :
+
+Français
+
+English
+
+Kiswahili
+
+
+
+---
+
+Sélection de langue
+
+Premier accès :
+
+Afficher un écran de bienvenue.
+
+Titre :
+
+"Choisissez votre langue"
+
+Boutons :
+
+Français
+
+English
+
+Kiswahili
+
+
+Sauvegarder le choix dans localStorage.
+
+Au prochain accès :
+
+ne plus afficher cet écran
+
+charger directement la langue enregistrée
+
+
+Un sélecteur de langue doit rester disponible dans le header.
+
+
+---
+
+Structure de la page
+
+1. Hero Section
+
+Grande bannière professionnelle.
+
+Contenu :
+
+Titre :
+
+"Des solutions digitales pour faire évoluer votre entreprise"
+
+Sous-titre :
+
+"ES-Company développe des outils modernes qui simplifient la gestion, améliorent les performances et accompagnent la croissance des entreprises."
+
+Boutons :
+
+Découvrir nos projets
+
+Nous contacter
+
+
+
+---
+
+2. Vidéo de présentation
+
+Section importante.
+
+Afficher :
+
+Vidéo de présentation ES-Company.
+
+Objectif :
+
+Expliquer :
+
+qui nous sommes
+
+ce que nous faisons
+
+notre vision
+
+
+Premier accès :
+
+Afficher automatiquement une fenêtre de présentation invitant l'utilisateur à regarder cette vidéo.
+
+Ne plus afficher après visualisation.
+
+Sauvegarde localStorage.
+
+
+---
+
+3. Nos solutions
+
+Cartes modernes.
+
+Exemples :
+
+Gestion d'entreprise
+
+Stocks Ventes Inventaires Dettes Dépenses
+
+SaaS
+
+Applications cloud Multi-utilisateurs Tableaux de bord
+
+Développement web
+
+Sites vitrines Landing pages Plateformes métiers
+
+Automatisation
+
+Processus Rapports Suivi d'activité
+
+
+---
+
+4. Nos projets
+
+Section premium.
+
+
+---
+
+StockFlow
+
+Solution de gestion commerciale.
+
+Description :
+
+StockFlow aide les entreprises à suivre leurs ventes, leurs stocks, leurs dépenses, leurs dettes et leur rentabilité à partir d'une interface simple et moderne.
+
+Fonctionnalités :
+
+ventes
+
+inventaire
+
+gestion stock
+
+dépenses
+
+pertes
+
+statistiques
+
+dettes clients
+
+
+Vidéo démonstration.
+
+Bouton :
+
+Découvrir StockFlow
+
+
+---
+
+CBC Station
+
+Lien :
+
+cbcstation.com
+
+Description :
+
+CBC Station est une plateforme de mise en relation entre entreprises et prestataires qualifiés en RDC.
+
+Objectif :
+
+Faciliter la recherche de professionnels et accélérer les collaborations commerciales.
+
+Bouton :
+
+Visiter CBC Station
+
+
+---
+
+5. Galerie vidéo
+
+Deux catégories :
+
+Présentations
+
+vidéos produits
+
+démonstrations
+
+
+Tutoriels
+
+utilisation StockFlow
+
+guides pratiques
+
+formations
+
+
+Cartes vidéo modernes.
+
+
+---
+
+6. Pourquoi ES-Company
+
+Mettre en avant :
+
+solutions concrètes
+
+développement sur mesure
+
+accompagnement
+
+innovation
+
+proximité avec les entreprises
+
+
+
+---
+
+7. Contact
+
+Carte professionnelle.
+
+Informations :
+
+Entreprise : ES-Company
+
+Email : contact@es-company.com
+
+Téléphone : à compléter
+
+WhatsApp : à compléter
+
+Adresse : Butembo, RDC
+
+Formulaire :
+
+Nom
+
+Entreprise
+
+Email
+
+Message
+
+
+
+---
+
+8. Footer
+
+Liens :
+
+Accueil
+
+Solutions
+
+Projets
+
+Vidéos
+
+Contact
+
+
+Copyright ES-Company.
+
+
+---
+
+Design
+
+Style :
+
+moderne
+
+premium
+
+entreprise technologique
+
+
+Inspirations :
+
+Stripe
+
+Notion
+
+Linear
+
+
+Couleurs :
+
+Bleu professionnel
+
+Blanc
+
+Gris clair
+
+Accent vert croissance
+
+
+Animations :
+
+légères
+
+fluides
+
+professionnelles
+
+
+Responsive mobile/tablette/desktop obligatoire.
+
+
+---
+
+Contraintes techniques
+
+Une seule page
+
+HTML/CSS/JS natif
+
+Aucun framework obligatoire
+
+LocalStorage pour langue et vidéo intro
+
+Performance élevée
+
+SEO optimisé
+
+Compatible Firebase ultérieurement
+
+Respect strict CSP
+
+Aucun innerHTML
+
+Aucun outerHTML
+
+Aucun insertAdjacentHTML
+
+
+Le résultat doit donner l'impression qu'ES-Company est déjà une entreprise technologique sérieuse et capable de développer des solutions professionnelles pour des clients locaux et internationaux.
+
+---
+
+Mise à jour demandée (Version Firebase multi-pages)
+
+1. Logique vidéo d'arrivée
+- La modal du premier accès doit afficher une vidéo publicitaire (pub), pas le tutoriel complet.
+
+2. Nouvelles pages
+- Ajouter `tutorials.html`:
+  - Tutoriel complet (vidéo longue)
+  - Bloc séries de tutoriels
+- Ajouter `media.html`:
+  - Vlog vidéo
+  - Galerie d'images
+
+3. Source de données
+- Les liens et médias doivent être chargés depuis Firestore (pas codés en dur).
+- Collections minimales: `videos_pub`, `videos_tutoriels`, `videos_series_tutoriels`, `videos_vlogs`, `media_images`, `site_links`.
+
+4. Contact professionnel (obligatoire)
+- Email: escompany98@gmail.com
+- Téléphone principal: +243 843 858 955
+- Ligne secondaire: +243 840 344 307
+
+5. Documentation projet
+- Tenir à jour `/firestore/firebase_collections.txt` (schéma collections).
+- Tenir à jour `/firestore/work_plan.txt` (plan de travail opérationnel).

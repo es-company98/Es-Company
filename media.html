@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://*.firebaseio.com https://*.googleapis.com; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' https://i.ytimg.com https://img.youtube.com; frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com; script-src 'self' https://www.gstatic.com; connect-src 'self' https://firestore.googleapis.com https://*.googleapis.com;">
+  <title>Médias — ES-Company</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header id="header" class="header">
+    <div class="container header__inner">
+      <a href="index.html#hero" class="header__logo">ES-<span>Company</span></a>
+      <nav class="nav" aria-label="Navigation principale">
+        <ul class="nav__list">
+          <li><a href="index.html#hero" class="nav__link" data-i18n="navHome">Accueil</a></li>
+          <li><a href="tutorials.html" class="nav__link" data-i18n="navTutorialsPage">Tutoriels</a></li>
+          <li><a href="index.html#gallery" class="nav__link" data-i18n="navVideos">Vidéos</a></li>
+          <li><a href="index.html#contact" class="nav__link" data-i18n="navContact">Contact</a></li>
+        </ul>
+        <div class="lang-selector" role="group" aria-label="Sélection de langue">
+          <button type="button" class="lang-selector__btn" data-lang="fr">FR</button>
+          <button type="button" class="lang-selector__btn" data-lang="en">EN</button>
+          <button type="button" class="lang-selector__btn" data-lang="sw">SW</button>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="page-main">
+    <section class="section page-hero">
+      <div class="container">
+        <div class="section__header">
+          <h1 class="section__title">Vlogs et Images</h1>
+          <p class="section__subtitle">Contenu média chargé depuis Firestore.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--alt">
+      <div class="container">
+        <div class="section__header">
+          <span class="video-badge video-badge--short">Vlog</span>
+          <h2 class="section__title">Vlog principal</h2>
+        </div>
+        <div id="media-vlog-video" class="video-section__wrapper video-section__wrapper--large"></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section__header">
+          <h2 class="section__title">Images</h2>
+          <p class="section__subtitle">Galerie d'images professionnelle.</p>
+        </div>
+        <div id="media-image-grid" class="firebase-image-grid"></div>
+      </div>
+    </section>
+
+    <section class="section section--alt">
+      <div class="container">
+        <div class="section__header">
+          <h2 class="section__title" data-i18n="contactInfoTitle">Contact professionnel</h2>
+        </div>
+        <div class="firebase-card-grid">
+          <article class="firebase-card">
+            <p><strong data-i18n="contactEmail">Email</strong>: <a href="mailto:escompany98@gmail.com">escompany98@gmail.com</a></p>
+            <p><strong data-i18n="contactPhone">Téléphone</strong>: <span data-i18n="contactPhoneValue">+243 843 858 955</span></p>
+            <p><strong data-i18n="contactSecondaryLine">Ligne secondaire</strong>: <span data-i18n="contactWhatsappValue">+243 840 344 307</span></p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__bottom">
+        <p data-i18n="footerCopyright">© 2026 ES-Company. Tous droits réservés.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/firebase-config.js"></script>
+  <script type="module" src="js/media-page.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,57 @@
+Firestore collections - ES-Company
+
+1) videos_pub
+- id: auto
+- youtubeUrl: string (required)
+- title: string
+- isActive: boolean
+- createdAt: timestamp
+
+2) videos_tutoriels
+- id: auto
+- youtubeUrl: string (required)
+- title: string
+- isActive: boolean
+- createdAt: timestamp
+
+3) videos_series_tutoriels
+- id: auto
+- youtubeUrl: string (required)
+- title: string
+- episodeNumber: number
+- isActive: boolean
+- createdAt: timestamp
+
+4) videos_vlogs
+- id: auto
+- youtubeUrl: string (required)
+- title: string
+- isActive: boolean
+- createdAt: timestamp
+
+5) media_images
+- id: auto
+- imageUrl: string (required)
+- title: string
+- category: string (ex: pub, tuto, vlog, entreprise)
+- isActive: boolean
+- createdAt: timestamp
+
+6) site_links
+- id: auto
+- key: string (required)
+  values attendues:
+  - cbc_station
+  - stockflow
+  - tutorials_page
+  - media_page
+- url: string (required)
+- isActive: boolean
+- createdAt: timestamp
+
+Validation minimale avant écriture:
+- youtubeUrl/imageUrl/url non vide
+- key dans la liste autorisée
+- isActive = true/false
+- jamais de champ arbitraire hors schéma
+
