@@ -1,32 +1,16 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
 import {
-  getFirestore,
   collection,
   getDocs,
   limit,
   query,
+  addDoc,
+  serverTimestamp,
+  where,
 } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
-
-let firestoreDb = null;
-
-function getFirebaseConfig() {
-  if (window.ES_FIREBASE_CONFIG && typeof window.ES_FIREBASE_CONFIG === "object") {
-    return window.ES_FIREBASE_CONFIG;
-  }
-  return null;
-}
-
-function ensureDb() {
-  if (firestoreDb) return firestoreDb;
-  const config = getFirebaseConfig();
-  if (!config) return null;
-  const app = initializeApp(config);
-  firestoreDb = getFirestore(app);
-  return firestoreDb;
-}
+import { getFirestoreDb } from "./firebase-core.js";
 
 async function readCollectionDocs(name, maxItems = 20) {
-  const db = ensureDb();
+  const db = getFirestoreDb();
   if (!db) return [];
   try {
     const ref = collection(db, name);
@@ -74,12 +58,64 @@ export async function loadVideoContent() {
 }
 
 export async function loadSiteLinks() {
-  const docs = await readCollectionDocs("site_links", 30);
+  const docs = await readCollectionDocs("site_links", 50);
   return docs.filter((item) => typeof item.key === "string" && typeof item.url === "string");
 }
 
 export async function loadMediaImages() {
   const docs = await readCollectionDocs("media_images", 40);
   return docs.filter((item) => typeof item.imageUrl === "string" && item.imageUrl.trim());
+}
+
+export async function saveContactMessage(payload) {
+  const db = getFirestoreDb();
+  if (!db) return false;
+  const data = {
+    name: payload.name,
+    company: payload.company || "",
+    email: payload.email,
+    message: payload.message,
+    userId: payload.userId || null,
+    userEmail: payload.userEmail || null,
+    createdAt: serverTimestamp(),
+  };
+  try {
+    await addDoc(collection(db, "contact_messages"), data);
+    return true;
+  } catch (error) {
+    console.error("contact_messages write error:", error);
+    return false;
+  }
+}
+
+export async function saveNewsletterEmail(email, userContext) {
+  const db = getFirestoreDb();
+  if (!db) return false;
+  try {
+    await addDoc(collection(db, "newsletter_subscribers"), {
+      email,
+      userId: userContext?.uid || null,
+      approvedUser: Boolean(userContext?.approved),
+      role: userContext?.role || "guest",
+      createdAt: serverTimestamp(),
+    });
+    return true;
+  } catch (error) {
+    console.error("newsletter_subscribers write error:", error);
+    return false;
+  }
+}
+
+export async function loadSiteLinksByKey(key) {
+  const db = getFirestoreDb();
+  if (!db) return null;
+  try {
+    const snap = await getDocs(query(collection(db, "site_links"), where("key", "==", key), limit(1)));
+    if (snap.empty) return null;
+    return snap.docs[0].data().url || null;
+  } catch (error) {
+    console.error("site_links key read error:", error);
+    return null;
+  }
 }
 

@@ -2,6 +2,7 @@ import { initHeader } from "./page-common.js";
 import { loadVideoContent } from "./firebase-content.js";
 import { getEmbedUrl } from "./videos.js";
 import { applyTutorialsLanguage, initTutorialsLangSelector } from "./lang-tutorials.js";
+import { canAccessProtectedContent, watchAuthState } from "./firebase-auth.js";
 
 const $ = (selector) => document.querySelector(selector);
 
@@ -30,10 +31,14 @@ function renderPlaceholder(container, text) {
   container.appendChild(p);
 }
 
-function renderMainTutorial(videoId) {
+function renderMainTutorial(videoId, allowed) {
   const container = $("#tutorial-main-video");
   if (!container) return;
   container.replaceChildren();
+  if (!allowed) {
+    renderPlaceholder(container, "Login + approbation admin requis pour ce tutoriel.");
+    return;
+  }
   const iframe = createEmbed(videoId, "Tutoriel ES-Company");
   if (!iframe) {
     renderPlaceholder(container, "Tutoriel indisponible");
@@ -42,7 +47,7 @@ function renderMainTutorial(videoId) {
   container.appendChild(iframe);
 }
 
-function renderSeries(videoId) {
+function renderSeries(videoId, allowed) {
   const list = $("#tutorial-series-list");
   if (!list) return;
   list.replaceChildren();
@@ -53,6 +58,16 @@ function renderSeries(videoId) {
   title.textContent = "Série tutoriel";
   const media = document.createElement("div");
   media.className = "firebase-card__media";
+  if (!allowed) {
+    const p = document.createElement("p");
+    p.className = "youtube-placeholder";
+    p.textContent = "Accès série tutoriel restreint.";
+    media.appendChild(p);
+    card.appendChild(title);
+    card.appendChild(media);
+    list.appendChild(card);
+    return;
+  }
   const iframe = createEmbed(videoId, "Série tutoriel ES-Company");
   if (iframe) {
     media.appendChild(iframe);
@@ -73,8 +88,11 @@ async function initTutorialsPage() {
   initHeader();
 
   const videos = await loadVideoContent();
-  renderMainTutorial(videos.tutoriel);
-  renderSeries(videos.seriesTutoriels);
+  watchAuthState((_user, profile) => {
+    const allowed = canAccessProtectedContent(profile);
+    renderMainTutorial(videos.tutoriel, allowed);
+    renderSeries(videos.seriesTutoriels, allowed);
+  });
 }
 
 document.addEventListener("DOMContentLoaded", () => {

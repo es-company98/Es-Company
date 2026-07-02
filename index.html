@@ -60,6 +60,13 @@
           <button type="button" class="lang-selector__btn" data-lang="en" id="lang-sel-en">EN</button>
           <button type="button" class="lang-selector__btn" data-lang="sw" id="lang-sel-sw">SW</button>
         </div>
+        <div class="auth-controls" id="auth-controls">
+          <span class="auth-status" id="auth-status" data-i18n="authGuest">Invité</span>
+          <a href="admin/" class="btn btn--secondary auth-admin-link auth-admin-link--hidden" id="admin-link">Admin</a>
+          <button type="button" class="btn btn--secondary" id="auth-open-login" data-i18n="authLogin">Login</button>
+          <button type="button" class="btn btn--primary" id="auth-open-signup" data-i18n="authSignup">Signup</button>
+          <button type="button" class="btn btn--secondary auth-logout-btn auth-logout-btn--hidden" id="auth-logout" data-i18n="authLogout">Logout</button>
+        </div>
         <button type="button" class="nav-toggle" id="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="nav-list">
           <span class="nav-toggle__bar"></span>
           <span class="nav-toggle__bar"></span>
@@ -67,6 +74,32 @@
         </button>
       </nav>
     </div>
+
+  <div id="auth-modal-overlay" class="overlay overlay--hidden" role="dialog" aria-modal="true" aria-labelledby="auth-modal-title">
+    <div class="intro-modal">
+      <h2 id="auth-modal-title" class="intro-modal__title">Compte utilisateur</h2>
+      <p class="intro-modal__text" id="auth-modal-text">Authentifiez-vous pour accéder aux contenus protégés.</p>
+      <form id="auth-form" class="contact-form" novalidate>
+        <div class="form-group">
+          <label for="auth-name" data-i18n="formName">Nom</label>
+          <input type="text" id="auth-name" autocomplete="name">
+        </div>
+        <div class="form-group">
+          <label for="auth-email" data-i18n="formEmail">Email</label>
+          <input type="email" id="auth-email" required autocomplete="email">
+        </div>
+        <div class="form-group">
+          <label for="auth-password">Mot de passe</label>
+          <input type="password" id="auth-password" required minlength="6" autocomplete="current-password">
+        </div>
+        <div class="intro-modal__actions">
+          <button type="button" class="btn btn--secondary" id="auth-cancel">Annuler</button>
+          <button type="submit" class="btn btn--primary" id="auth-submit">Continuer</button>
+        </div>
+        <p class="form-message" id="auth-message" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </div>
   </header>
 
   <main id="main">
@@ -231,6 +264,23 @@
           </article>
 
         </div>
+      </div>
+    </section>
+
+    <section id="newsletter" class="section">
+      <div class="container">
+        <div class="section__header fade-in">
+          <h2 class="section__title" data-i18n="newsletterTitle">Newsletter</h2>
+          <p class="section__subtitle" data-i18n="newsletterSubtitle">Recevez nos nouveautés produits, tutoriels et vlogs.</p>
+        </div>
+        <form id="newsletter-form" class="contact-form fade-in" novalidate>
+          <div class="form-group">
+            <label for="newsletter-email" data-i18n="formEmail">Email</label>
+            <input type="email" id="newsletter-email" required autocomplete="email">
+          </div>
+          <button type="submit" class="btn btn--primary" data-i18n="newsletterCta">S'abonner</button>
+          <p class="form-message" id="newsletter-message" role="status" aria-live="polite"></p>
+        </form>
       </div>
     </section>
 

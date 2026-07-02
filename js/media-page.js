@@ -2,6 +2,7 @@ import { initHeader } from "./page-common.js";
 import { loadMediaImages, loadVideoContent } from "./firebase-content.js";
 import { getEmbedUrl } from "./videos.js";
 import { applyMediaLanguage, initMediaLangSelector } from "./lang-media.js";
+import { canAccessProtectedContent, watchAuthState } from "./firebase-auth.js";
 
 const $ = (selector) => document.querySelector(selector);
 
@@ -22,10 +23,17 @@ function createEmbed(videoId, title) {
   return iframe;
 }
 
-function renderVlog(videoId) {
+function renderVlog(videoId, allowed) {
   const container = $("#media-vlog-video");
   if (!container) return;
   container.replaceChildren();
+  if (!allowed) {
+    const p = document.createElement("p");
+    p.className = "youtube-placeholder";
+    p.textContent = "Login + approbation admin requis pour le vlog.";
+    container.appendChild(p);
+    return;
+  }
   const iframe = createEmbed(videoId, "Vlog ES-Company");
   if (iframe) {
     container.appendChild(iframe);
@@ -78,7 +86,9 @@ async function initMediaPage() {
   initHeader();
 
   const [videos, images] = await Promise.all([loadVideoContent(), loadMediaImages()]);
-  renderVlog(videos.vlog);
+  watchAuthState((_user, profile) => {
+    renderVlog(videos.vlog, canAccessProtectedContent(profile));
+  });
   renderImages(images);
 }
 

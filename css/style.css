@@ -354,6 +354,26 @@ ul {
   gap: 2rem;
 }
 
+.auth-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.auth-status {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  max-width: 220px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.auth-logout-btn--hidden,
+.auth-admin-link--hidden {
+  display: none;
+}
+
 .nav__list {
   display: flex;
   gap: 1.75rem;
@@ -1211,6 +1231,10 @@ html.js-ready .fade-in.fade-in--visible {
 
   .nav-toggle {
     display: flex;
+  }
+
+  .auth-controls {
+    display: none;
   }
 
   .section {

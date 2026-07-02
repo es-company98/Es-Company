@@ -49,9 +49,40 @@ Firestore collections - ES-Company
 - isActive: boolean
 - createdAt: timestamp
 
+7) users
+- id: uid Firebase Auth (required)
+- email: string (required)
+- displayName: string
+- role: string (required: admin | editor | member)
+- approved: boolean (required)
+- active: boolean (required)
+- createdAt: timestamp
+- updatedAt: timestamp
+
+8) contact_messages
+- id: auto
+- name: string (required)
+- company: string
+- email: string (required)
+- message: string (required)
+- userId: string | null
+- userEmail: string | null
+- createdAt: timestamp
+
+9) newsletter_subscribers
+- id: auto
+- email: string (required)
+- userId: string | null
+- approvedUser: boolean
+- role: string (guest|member|editor|admin)
+- createdAt: timestamp
+
 Validation minimale avant écriture:
 - youtubeUrl/imageUrl/url non vide
 - key dans la liste autorisée
 - isActive = true/false
 - jamais de champ arbitraire hors schéma
+- users.role dans la liste autorisée
+- users.approved = false par défaut à l'inscription
+- refuser les contenus protégés si user non connecté ou non approuvé
 
