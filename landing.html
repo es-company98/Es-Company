@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StockFlow par Es-Company | Maîtrisez la gestion de votre boutique</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-gradient: linear-gradient(135deg, #0B1E4F 0%, #1E4FB8 100%);
+            --bg-grid: rgba(255,255,255,0.05);
+            --text-primary: #FFFFFF;
+            --text-secondary: rgba(255,255,255,0.85);
+            --brand-blue: #0047FF;
+            --brand-blue-dark: #0B1E4F;
+            --cta-green: #00C853;
+            --cta-green-text: #FFFFFF;
+            --card-bg: rgba(255, 255, 255, 0.07);
+            --card-border: rgba(255, 255, 255, 0.12);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background: var(--bg-gradient);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* En-tête / Bannière de Langue */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo-container {
+            font-weight: 800;
+            font-size: 1.25rem;
+            letter-spacing: 0.5px;
+            color: var(--text-primary);
+        }
+
+        .lang-switcher {
+            display: flex;
+            gap: 8px;
+        }
+
+        .lang-btn {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            color: var(--text-primary);
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+        }
+
+        .lang-btn.active, .lang-btn:hover {
+            background: var(--brand-blue);
+            border-color: var(--brand-blue);
+        }
+
+        /* Structure Globale des Sections */
+        section {
+            padding: 50px 5%;
+            max-width: 1100px;
+            margin: 0 auto;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* SECTION 1 : ABOVE THE FOLD */
+        .hero-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+            padding-top: 40px;
+            padding-bottom: 60px;
+        }
+
+        .badge-alert {
+            display: inline-block;
+            background: rgba(255, 71, 87, 0.15);
+            color: #ff6b81;
+            border: 1px solid rgba(255, 71, 87, 0.3);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            letter-spacing: 0.5px;
+        }
+
+        .hero-content h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .hero-content p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+        }
+
+        .lead-form-box {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            padding: 30px;
+            border-radius: 16px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 14px 18px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 8px;
+            color: #FFFFFF;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .form-group input:focus {
+            border-color: var(--brand-blue);
+        }
+
+        .cta-submit-btn {
+            width: 100%;
+            background: var(--cta-green);
+            color: var(--cta-green-text);
+            border: none;
+            padding: 16px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.2s, background 0.2s;
+            box-shadow: 0 4px 15px rgba(0, 200, 83, 0.4);
+        }
+
+        .cta-submit-btn:hover {
+            transform: translateY(-2px);
+            background: #00b048;
+        }
+
+        .mockup-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .ebook-mockup {
+            width: 100%;
+            max-width: 380px;
+            border-radius: 12px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: transform 0.5s ease;
+        }
+
+        .ebook-mockup:hover {
+            transform: scale(1.02);
+        }
+
+        /* SECTION 2 : DIAGNOSTIC & DOULEUR */
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 50px;
+        }
+
+        .pain-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .pain-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            padding: 30px;
+            border-radius: 12px;
+            backdrop-filter: blur(5px);
+        }
+
+        .pain-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 12px;
+            color: #ff6b81;
+        }
+
+        .pain-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .transition-text {
+            text-align: center;
+            font-size: 1.15srem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: rgba(0, 71, 255, 0.1);
+            border-left: 4px solid var(--brand-blue);
+            border-radius: 0 8px 8px 0;
+        }
+
+        /* SECTION 3 : BRIDGE & SOLUTION */
+        .bridge-section {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 20px;
+            border: 1px solid var(--card-border);
+            padding: 60px 40px;
+        }
+
+        .bridge-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 40px auto;
+        }
+
+        .bridge-content h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            font-weight: 800;
+        }
+
+        .bridge-content p {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .benefit-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--card-border);
+            padding: 25px;
+            border-radius: 10px;
+        }
+
+        .benefit-card h4 {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            color: #4cd137;
+        }
+
+        .benefit-card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* SECTION 4 : OFFRE & MARINADE DU PRIX */
+        .offer-box {
+            background: linear-gradient(145deg, rgba(11,30,79,0.8), rgba(0,71,255,0.2));
+            border: 2px solid var(--brand-blue);
+            border-radius: 20px;
+            padding: 50px;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+        }
+
+        .pricing-anchor {
+            margin: 30px 0;
+        }
+
+        .old-price {
+            text-decoration: line-through;
+            color: rgba(255,255,255,0.5);
+            font-size: 1.5rem;
+            margin-right: 15px;
+        }
+
+        .new-price {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #4cd137;
+        }
+
+        .offer-details {
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            font-size: 1.05rem;
+        }
+
+        .whatsapp-cta-btn {
+            display: inline-block;
+            background: var(--cta-green);
+            color: var(--cta-green-text);
+            padding: 18px 35px;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 10px 25px rgba(0, 200, 83, 0.4);
+        }
+
+        .whatsapp-cta-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(0, 200, 83, 0.6);
+        }
+
+        /* SECTION 5 : CONFIANCE & PREUVE */
+        .trust-section {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .trust-images {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .trust-img {
+            width: 100%;
+            max-width: 200px;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 12px;
+            border: 2px solid var(--card-border);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+        }
+
+        .trust-content h2 {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
+
+        .trust-content p {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            line-height: 1.7;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: rgba(255,255,255,0.4);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--card-border);
+            margin-top: 40px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-section, .trust-section {
+                grid-template-columns: 1fr;
+            }
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+            .offer-box {
+                padding: 30px 20px;
+            }
+            .new-price {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- En-tête -->
+    <header>
+        <div class="logo-container" data-i18n="logo">ES-COMPANY / STOCKFLOW</div>
+        <div class="lang-switcher">
+            <button class="lang-btn active" onclick="setLanguage('fr')">FR</button>
+            <button class="lang-btn" onclick="setLanguage('en')">EN</button>
+        </div>
+    </header>
+
+    <!-- SECTION 1 : ABOVE THE FOLD -->
+    <section class="visible">
+        <div class="hero-section">
+            <div class="hero-content">
+                <span class="badge-alert" data-i18n="badge_alert">🛑 Arrêtez de subir la gestion papier</span>
+                <h1 data-i18n="hero_title">Les 3 erreurs invisibles qui vident la caisse de votre commerce chaque jour.</h1>
+                <p data-i18n="hero_subtitle">Téléchargez le guide gratuit d'Es-Company et découvrez comment les commerçants malins sécurisent leur argent, éliminent les pertes et reprennent le contrôle total.</p>
+            </div>
+            <div class="lead-form-box">
+                <form id="leadForm"onsubmit="event.preventDefault();">
+                    <div class="form-group">
+                        <input type="text" id="nom" placeholder="Votre Nom Complet" required data-i18n-placeholder="placeholder_name">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="contact" placeholder="Votre Email ou Numéro WhatsApp" required data-i18n-placeholder="placeholder_contact">
+                    </div>
+                    <button type="submit" class="cta-submit-btn" data-i18n="cta_ebook">Je reçois mon guide gratuit immédiatement ➔</button>
+                </form>
+            </div>
+        </div>
+        <div class="mockup-container" style="margin-top: 20px;">
+            <img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=600&q=80" alt="Mockup E-book" class="ebook-mockup">
+        </div>
+    </section>
+
+    <!-- SECTION 2 : LE PROBLÈMES & LE DIAGNOSTIC -->
+    <section>
+        <h2 class="section-title" data-i18n="section2_title">Reconnaissez-vous cette situation dans votre boutique ?</h2>
+        <div class="pain-grid">
+            <div class="pain-card">
+                <h3 data-i18n="pain1_title">📉 Le flou total sur les chiffres</h3>
+                <p data-i18n="pain1_desc">Vous utilisez des cahiers papier, les calculs sont faits à la volée, et à la fin du mois, vous ne connaissez pas votre vrai bénéfice.</p>
+            </div>
+            <div class="pain-card">
+                <h3 data-i18n="pain2_title">💸 Les pertes invisibles</h3>
+                <p data-i18n="pain2_desc">Des produits qui disparaissent, des dettes mal contrôlées et de l'argent qui s'envole sans que vous sachiez exactement où.</p>
+            </div>
+            <div class="pain-card">
+                <h3 data-i18n="pain3_title">🧠 La fatigue mentale constante</h3>
+                <p data-i18n="pain3_desc">Mémorisation excessive, efforts superflus, stress permanent... Vous travaillez plus, mais vous ne contrôlez rien.</p>
+            </div>
+        </div>
+        <div class="transition-text" data-i18n="transition_text">
+            "Ce n’est pas de votre faute. Le papier a atteint ses limites. Pour grandir, vous avez besoin d’un système, pas d'efforts surhumains."
+        </div>
+    </section>
+
+    <!-- SECTION 3 : LA TRANSITION VERS L'OFFRE (LE BRIDGE) -->
+    <section>
+        <div class="bridge-section">
+            <div class="bridge-content">
+                <h2 data-i18n="bridge_title">Vous voulez aller plus loin et automatiser tout ça sans effort ?</h2>
+                <p data-i18n="bridge_desc">Le guide gratuit va vous ouvrir les yeux sur les erreurs à éviter. Mais pour transformer votre commerce durablement, vous avez besoin de l'outil que nous avons créé pour notre propre boutique : <strong>StockFlow</strong>.</p>
+            </div>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <h4 data-i18n="ben1_title">⚡ Installation ultra-rapide</h4>
+                    <p data-i18n="ben1_desc">Pris en main le jour même, opérationnel en quelques minutes seulement sans compétences techniques.</p>
+                </div>
+                <div class="benefit-card">
+                    <h4 data-i18n="ben2_title">📊 Tableau de bord de l'argent</h4>
+                    <p data-i18n="ben2_desc">Suivez vos ventes, vos dépenses et vos dettes en 5 à 15 minutes par jour de gestion active.</p>
+                </div>
+                <div class="benefit-card">
+                    <h4 data-i18n="ben3_title">🛡️ Protection de votre capital</h4>
+                    <p data-i18n="ben3_desc">Fini les pertes de stock, le système travaille pour vous et sécurise vos gains, même à distance.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 4 : L'OFFRE IRRÉSISTIBLE & LA MARINADE DU PRIX -->
+    <section>
+        <div class="offer-box">
+            <h2 class="section-title" data-i18n="offer_title" style="margin-bottom: 20px;">Passez d'une gestion approximative à un contrôle total.</h2>
+            <p class="offer-details" data-i18n="offer_desc">Obtenez StockFlow, son écosystème de formations vidéo pratiques et son accompagnement complet pour sécuriser votre entreprise.</p>
+            <div class="pricing-anchor">
+                <span class="old-price">500$</span>
+                <span class="new-price" data-i18n="offer_price">150$</span>
+            </div>
+            <p class="offer-details" style="font-weight: 600; color: #fff;" data-i18n="offer_limit">🔥 Offre de lancement exclusive réservée aux 20 premiers commerçants (Accès à vie).</p>
+            <a href="https://wa.me/243840344307?text=Bonjour,%20je%20veux%20profiter%20de%20l%27offre%20de%20lancement%20StockFlow%20à%20150$" id="whatsappBtn" class="whatsapp-cta-btn" data-i18n="whatsapp_cta">Discuter avec l'expert et réserver ma licence ➔</a>
+        </div>
+    </section>
+
+    <!-- SECTION 5 : LA CONFIANCE & LA PREUVE -->
+    <section>
+        <div class="trust-section">
+            <div class="trust-images">
+                <img src="Es-Company.png" alt="Es-Company Logo / Visual" class="trust-img" onerror="this.src='https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=400&q=80'">
+                <img src="https://elongastarks.github.io/Portfolio/es.jpg" alt="Fabricant CEO" class="trust-img" onerror="this.src='https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80'">
+            </div>
+            <div class="trust-content">
+                <h2 data-i18n="trust_title">Pourquoi faire confiance à Es-Company ?</h2>
+                <p data-i18n="trust_desc">
+                    Nous ne vendons pas seulement des logiciels théoriques. StockFlow est né de nos propres galères de commerçants face aux limites du papier. Nous utilisons ce que nous enseignons, nous vous accompagnons personnellement à l'installation, et nous vous offrons des formations vidéo claires, conçues pour des entrepreneurs qui n'ont pas de temps à perdre. C'est le début d'un véritable écosystème pour faire grandir votre entreprise.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Es-Company / StockFlow. Tous droits réservés.</p>
+    </footer>
+
+    <!-- Script de liaison et animations -->
+    <script src:"js/landing_txt.js"></script>
+    <script src:"js/landing_data.js"></script>
+      
+</body>
+</html>
