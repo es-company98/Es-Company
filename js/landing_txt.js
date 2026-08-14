@@ -80,18 +80,38 @@
                 trust_desc: "We don't just sell theoretical software. StockFlow was born from our own struggles as merchants facing paper limits. We use what we teach, support you personally during setup, and offer clear video training designed for busy entrepreneurs. This is the start of a true ecosystem to grow your business."
             }
         };
+// 1. Fonction modifiée pour sauvegarder et appliquer la langue
+function setLanguage(lang) {
+    // Enregistrer le choix dans le stockage local du navigateur
+    localStorage.setItem('stockflow_lang', lang);
 
-        function setLanguage(lang) {
-            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-
-            const t = translations[lang];
-            document.querySelectorAll('[data-i18n]').forEach(el => {
-                const key = el.getAttribute('data-i18n');
-                if (t[key]) el.textContent = t[key];
-            });
-            document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
-                const key = el.getAttribute('data-i18n-placeholder');
-                if (t[key]) el.placeholder = t[key];
-            });
+    // Mettre à jour l'état visuel des boutons de langue
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+        if (btn.textContent.trim().toLowerCase() === lang.toLowerCase()) {
+            btn.classList.add('active');
+        } else {
+            btn.classList.remove('active');
         }
+    });
+
+    const t = translations[lang];
+    if (!t) return;
+
+    // Traduction des textes principaux
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (t[key]) el.textContent = t[key];
+    });
+
+    // Traduction des placeholders des formulaires
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+        const key = el.getAttribute('data-i18n-placeholder');
+        if (t[key]) el.placeholder = t[key];
+    });
+}
+
+// 2. Charger automatiquement la langue enregistrée dès l'ouverture ou le rechargement de la page
+document.addEventListener('DOMContentLoaded', () => {
+    const savedLang = localStorage.getItem('stockflow_lang') || 'fr'; // 'fr' par défaut si rien n'est enregistré
+    setLanguage(savedLang);
+});
